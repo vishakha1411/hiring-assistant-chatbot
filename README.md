@@ -52,35 +52,66 @@ $ streamlit run app1.py
   - google-generativeai
   - Regex for input validation
 
-## Prompt Design
+### Prompt Design
 
-The prompt for generating technical questions is carefully crafted to:
-- Understand the candidate's tech stack.
-- Generate beginner-friendly and relevant questions.
-- Provide concise hints and feedback on incorrect answers.
+The prompt design plays a crucial role in ensuring the effectiveness of the Hiring Assistant Chatbot. The prompts were meticulously crafted to gather accurate candidate details and assess their technical expertise.
 
-The evaluation prompt instructs the model to assess the response, detect incorrect or incomplete answers, and offer suggestions for improvement.
+1. **Information Gathering Prompt:**
+   - A structured prompt was designed to collect essential candidate details such as name, email, experience, tech stack, and desired position. The chatbot uses input validation functions to ensure data accuracy and completeness.
 
-## Challenges & Solutions
+2. **Technical Question Generation Prompt:**
+   - The following prompt was used to dynamically generate technical questions:
+   ```
+   Generate 5 short one-line or word-answer technical interview questions about the following technologies: {tech_stack}.
+   Tailor the difficulty of the questions to a candidate with {experience} years of experience with 0 being very easy, 1-2 being easy-medium, and 3+ being good level.
+   Ensure the questions are clear, concise, and relevant to their skill level. Return only the questions, numbered sequentially.
+   ```
+   This prompt enables the chatbot to adapt the complexity of questions based on the candidate's experience level.
 
-1. **Input Validation:**
-   - Implemented regex patterns and logical checks for proper validation of user inputs.
+3. **Answer Evaluation Prompt:**
+   ```
+   You are an expert technical interviewer. Evaluate the candidate's answer: '{user_input}'
+   for the technical interview question: '{current_question}'.
+   If the answer is incorrect, provide a hint. If incomplete, suggest improvements.
+   Keep the response brief.
+   ```
+   This allows the chatbot to assess the candidate's response and offer constructive feedback.
 
-2. **Handling Incorrect Responses:**
-   - Introduced a retry mechanism with hints for improvement after the first incorrect attempt.
-   - Automatic progression to the next question after two incorrect attempts.
 
-3. **Maintaining Conversation State:**
-   - Utilized Streamlit's session state to store conversation history and user progress.
+### Challenges & Solutions
 
-4. **API Error Handling:**
-   - Handled exceptions to ensure smooth interaction even in case of API failures.
+1. **Accurate Candidate Data Collection:**
+   - **Challenge:** Handling invalid inputs like incorrect email format or incomplete tech stack.
+   - **Solution:** Implemented regex-based validation functions for email, phone number, and experience to ensure accurate data collection.
 
-## Future Scope
+2. **Generating Relevant Technical Questions:**
+   - **Challenge:** Generating questions tailored to the candidate's tech stack and experience level.
+   - **Solution:** Utilized the Gemini API to dynamically generate relevant and concise questions based on the provided tech stack and experience.
 
-- Integrate database support for storing candidate responses.
-- Expand to advanced technical rounds and coding challenges.
-- Implement a scoring system to evaluate candidate performance.
+3. **Handling Incorrect or Incomplete Responses:**
+   - **Challenge:** Providing feedback when a candidate's answer is incorrect or incomplete.
+   - **Solution:** Integrated an evaluation prompt to analyze the user's response and provide hints or improvements for better learning.
+
+### Future Scope
+
+1. **Enhanced User Experience:**
+   - Integrate natural language understanding (NLU) models to improve the chatbot's conversational flow and adaptability.
+
+2. **Advanced Question Difficulty Tuning:**
+   - Introduce a feature to allow interviewers to manually adjust the difficulty of questions or select specific domains for deeper evaluation.
+
+3. **Real-time Performance Analysis:**
+   - Implement a scoring system to evaluate candidate performance and generate detailed analytics for hiring managers.
+
+4. **Multi-Language Support:**
+   - Expand the chatbot's capability to handle interviews in multiple languages for global hiring.
+
+5. **Integration with ATS (Applicant Tracking Systems):**
+   - Seamlessly integrate the chatbot with popular ATS platforms like Greenhouse or Lever to streamline candidate evaluation and tracking.
+
+6. **Voice-Based Interaction:**
+   - Introduce voice-based interviews for a more interactive and engaging experience.
+
 
 ### Contact
 
