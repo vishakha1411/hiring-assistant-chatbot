@@ -3,7 +3,7 @@ import google.generativeai as genai
 import re  # For email validation
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyATKzzncrUDZl2oF7-IAs65o2km1yvRxaU")
+genai.configure(api_key="YOUR_API_KEY")
 
 # Function to get Gemini API response
 def get_gemini_response(prompt):
