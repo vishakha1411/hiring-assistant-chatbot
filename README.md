@@ -29,8 +29,9 @@ $ cd hiring-assistant-chatbot
 ```bash
 $ pip install -r requirements.txt
 ```
-
-4. Run the Streamlit application:
+4. Add your Gemini API key in app1.py.
+  
+5. Run the Streamlit application:
 ```bash
 $ streamlit run app1.py
 ```
